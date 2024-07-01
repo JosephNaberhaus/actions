@@ -19,4 +19,4 @@ jobs:
         with:
           goos: linux
           goarch: amd64
-          ldflags: "-X "main.toGreet=World"
+          ldflags: -X main.toGreet=World
