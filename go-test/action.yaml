@@ -23,4 +23,4 @@ runs:
       uses: actions/upload-artifact@v4
       with:
         name: test-report.json
-        path: test-report.json
+        path: ${{ inputs.package }}/test-report.json
