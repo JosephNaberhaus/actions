@@ -1,0 +1,26 @@
+name: Go Test
+description: Runs all go unit tests
+inputs:
+  package:
+    description: Package to build
+    required: false
+    default: .
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: stable
+        check-latest: true
+        cache: false
+    - name: Run tests
+      working-directory: ${{ inputs.package }}
+      shell: bash
+      run: go test -json ./... > ${{ inputs.package }}-test-report.json
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.package }}-test-report.json
+        path: ${{ inputs.package }}-test-report.json
