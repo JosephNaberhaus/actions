@@ -26,19 +26,23 @@ runs:
       uses: actions/setup-go@v5
       with:
         go-version: stable
+        check-latest: true
+        cache: false
     - name: Build binary
       shell: bash
       env:
         GOOS: ${{ inputs.goos }}
         GOARCH: ${{ inputs.goarch }}
-      run: go build -ldflags "${{ inputs.ldflags }}" -o ${{ github.event.repository.name }}-${{ inputs.goos }}-${{ inputs.goarch }} ${{ inputs.package }}
+      working-directory: ${{ inputs.package }}
+      run: go build -ldflags "${{ inputs.ldflags }}" -o ${{ github.event.repository.name }}-${{ inputs.goos }}-${{ inputs.goarch }} .
     - name: Upload binary to release
       if: github.event_name == 'release' && github.event.action == 'created'
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
+      working-directory: ${{ inputs.package }}
       run: gh release upload ${{ github.event.release.tag_name }} ${{ github.event.repository.name }}-${{ inputs.goos }}-${{ inputs.goarch }}
     - name: Upload binary as artifact
       uses: actions/upload-artifact@v4
       with:
-          name: ${{ github.event.repository.name }}-${{ inputs.goos }}-${{ inputs.goarch }}
+          name: ${{ inputs.package }}/${{ github.event.repository.name }}-${{ inputs.goos }}-${{ inputs.goarch }}
