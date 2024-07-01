@@ -1,4 +1,4 @@
-name: Build Go Binaries
+name: Release Go Binary
 description: Builds a go binary and uploads it
 inputs:
   github-token:

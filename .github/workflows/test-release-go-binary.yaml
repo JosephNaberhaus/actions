@@ -1,4 +1,4 @@
-name: Test Release Go Binaries
+name: Test Release Go Binary
 
 on:
   release:
@@ -9,13 +9,13 @@ on:
       - master
 
 jobs:
-  test-release-go-binaries:
+  test-release-go-binary:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build binary
-        uses: ./release-go-binaries
+        uses: ./release-go-binary
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           package: test/go-application
