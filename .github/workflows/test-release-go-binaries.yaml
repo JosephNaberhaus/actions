@@ -11,6 +11,8 @@ on:
 jobs:
   test-release-go-binaries:
     runs-on: ubuntu-latest
+    defaults:
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -18,6 +20,7 @@ jobs:
         uses: ./release-go-binaries
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          package: test/go-application
           goos: linux
           goarch: amd64
           ldflags: -X main.toGreet=World

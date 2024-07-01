@@ -4,6 +4,10 @@ inputs:
   github-token:
     description: Github token
     required: true
+  package:
+    description: Package to build
+    required: false
+    default: .
   goos:
     description: GOOS to build for
     required: true
@@ -27,7 +31,7 @@ runs:
       env:
         GOOS: ${{ inputs.goos }}
         GOARCH: ${{ inputs.goarch }}
-      run: go build -ldflags "${{ inputs.ldflags }}" -o ${{ github.event.repository.name }}-${{ inputs.goos }}-${{ inputs.goarch }} .
+      run: go build -ldflags "${{ inputs.ldflags }}" -o ${{ github.event.repository.name }}-${{ inputs.goos }}-${{ inputs.goarch }} ${{ inputs.package }}
     - name: Upload binary to release
       if: github.event_name == 'release' && github.event.action == 'created'
       shell: bash
