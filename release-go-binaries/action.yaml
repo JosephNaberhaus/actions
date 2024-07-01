@@ -1,6 +1,9 @@
 name: Build Go Binaries
 description: Builds a go binary and uploads it
 inputs:
+  github-token:
+    description: Github token
+    required: true
   goos:
     description: GOOS to build for
     required: true
@@ -29,7 +32,7 @@ runs:
       if: github.event_name == 'release' && github.event.action == 'created'
       shell: bash
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
       run: gh release upload ${{ github.event.release.tag_name }} ${{ github.event.repository.name }}-${{ inputs.goos }}-${{ inputs.goarch }}
     - name: Upload binary as artifact
       uses: actions/upload-artifact@v4

@@ -17,6 +17,7 @@ jobs:
       - name: Build binary
         uses: ./release-go-binaries
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           goos: linux
           goarch: amd64
           ldflags: -X main.toGreet=World
