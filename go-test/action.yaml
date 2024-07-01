@@ -18,9 +18,9 @@ runs:
     - name: Run tests
       working-directory: ${{ inputs.package }}
       shell: bash
-      run: go test -json ./... > ${{ inputs.package }}-test-report.json
+      run: go test -json ./... > test-report.json
     - name: Upload test results
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ inputs.package }}-test-report.json
-        path: ${{ inputs.package }}-test-report.json
+        name: test-report.json
+        path: test-report.json
