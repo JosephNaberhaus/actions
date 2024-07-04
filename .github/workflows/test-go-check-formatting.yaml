@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Format
+      - name: Check Formatting
         uses: ./go-check-formatting
         with:
           package: test/go-application
