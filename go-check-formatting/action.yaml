@@ -1,5 +1,5 @@
-name: Go Test
-description: Runs all go unit tests
+name: Go Check Formatting
+description: Checks that the code is formatted with `goimports`
 inputs:
   package:
     description: Package to format

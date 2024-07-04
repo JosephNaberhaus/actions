@@ -1,4 +1,4 @@
-name: Test Go Format
+name: Test Go Check Formatting
 
 on:
   push:
@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Run tests
-        uses: ./go-format
+      - name: Format
+        uses: ./go-check-formatting
         with:
           package: test/go-application
