@@ -1,7 +1,12 @@
 # Actions
 Collection of reusable Github Actions for personal use.
 
-There are better alternatives to everything here. I just didn't like the practice of pulling in third-party actions into my projects. In this repo, I only use the actions provided by Github themselves. 
+There are better alternatives to everything here. I just didn't like the practice of pulling in third-party actions into my projects. In this repo, I only use the actions provided by GitHub themselves. 
+
+## commit-and-push
+Creates a commit with the local changes (if any) and pushes it.
+
+[Example usage](https://github.com/JosephNaberhaus/hacker-news-font-page/blob/master/.github/workflows/scraper.yaml)
 
 ## go-check-formatting
 Ensures that the code has been formatted with [goimports](https://pkg.go.dev/golang.org/x/tools/cmd/goimports).
