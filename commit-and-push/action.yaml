@@ -1,0 +1,23 @@
+name: Commit and Push
+description: Commits any changes and pushes them to the repo.
+inputs:
+  message:
+    description: The commit message
+
+runs:
+  using: composite
+  steps:
+    - name: Check if there are changes
+      shell: bash
+      id: check-diff
+      run: |
+        git add . && git diff --quiet && git diff --cached --quiet && echo "changes=false" || echo "changes=true" >> $GITHUB_OUTPUT
+    - name: Commit
+      if: ${{ steps.check-diff.outputs.changes == 'true' }}
+      shell: bash
+      run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add .
+        git commit -m "${{ inputs.message }}"
+        git push
