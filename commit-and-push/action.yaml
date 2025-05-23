@@ -13,7 +13,7 @@ runs:
       run: |
         git add . && git diff --quiet && git diff --cached --quiet && echo "changes=false" || echo "changes=true" >> $GITHUB_OUTPUT
     - name: Commit
-      if: ${{ steps.check-diff.changes == 'true' }}
+      if: ${{ steps.check-diff.outputs.changes == 'true' }}
       shell: bash
       run: |
         git config user.name github-actions
