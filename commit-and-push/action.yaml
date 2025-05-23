@@ -15,7 +15,7 @@ runs:
         git add . && git diff --quiet && git diff --cached --quiet 
         echo "exitcode=$?" >> $GITHUB_OUTPUT
     - name: Commit
-      if: steps.check-diff.exitcode == 0
+      if: steps.check-diff.exitcode != 1
       shell: bash
       run: |
         git config user.name github-actions
